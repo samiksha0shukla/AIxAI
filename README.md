@@ -21,8 +21,6 @@ This version also supports local LLMs with Ollama for the main agent and reasoni
 - ✅ **Supabase Integration**: Dynamically retrieves relevant documentation context from a centralized vector/document database.
 - ✅ **Tool-Enhanced Agent**: Custom tools like `list_documentation_pages()` are defined and registered within the agent.
 - ✅ **Human-in-the-loop Ready**: Scope files and reasoning steps are saved for manual validation or refinement.
-- ✅ **Specialized agents for reasoning, routing, and coding**
-- ✅ **Pydantic AI documentation crawling and chunking**
 
 ---
 
