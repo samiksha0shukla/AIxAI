@@ -46,6 +46,7 @@ It combines **LangGraph**, **Pydantic AI**, **Supabase**, **OpenAI**, and a **re
 - `knowledgebase.py`: Script to crawl documentation and upload to Supabase
 - `pydantic_ai_coder.py`: Defines tools and coder logic using Pydantic AI
 - `multi_agent.py`: Main agent orchestration using LangGraph
+- `site_pages.sql`: Database setup commands
 - `user\_interface.py`: CLI or UI stream interface to interact with the agent
 - `workbench/`
    - `scope.md`: Output file containing the generated agent scope
