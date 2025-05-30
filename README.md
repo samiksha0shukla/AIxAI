@@ -9,6 +9,8 @@ An intelligent documentation crawler, semantic retriever, and multi-agent LLM or
 
 It combines **LangGraph**, **Pydantic AI**, **Supabase**, **OpenAI**, and a **reasoning engine** to provide an extensible framework for building advanced task-specific agents — with human feedback (human-in-the-loop), modular tools, and RAG (Retrieval-Augmented Generation) at its core.
 
+This version also supports local LLMs with Ollama for the main agent and reasoning LLM.
+
 ---
 
 ## 🚀 Features
