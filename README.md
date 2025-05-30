@@ -44,6 +44,7 @@ It combines **LangGraph**, **Pydantic AI**, **Supabase**, **OpenAI**, and a **re
 
 ## 📦 Project Structure
 ├── crawl4ai+supabase.py       # Script to crawl documentation and upload to Supabase
+
 ├── pydantic\_ai\_coder.py       # Defines tools and coder logic using Pydantic AI
 ├── pydantic+langgraph.py      # Main agent orchestration using LangGraph
 ├── user\_interface.py          # CLI or UI stream interface to interact with the agent
