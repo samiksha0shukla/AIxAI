@@ -37,4 +37,38 @@ It combines **LangGraph**, **Pydantic AI**, **Supabase**, **OpenAI**, and a **re
 ---
 
 ## 📦 Project Structure
+├── crawl4ai+supabase.py # Script to crawl documentation and upload to Supabase
+├── pydantic_ai_coder.py # Defines tools and coder logic using Pydantic AI
+├── pydantic+langgraph.py # Main agent orchestration using LangGraph
+├── user_interface.py # CLI or UI stream interface to interact with the agent
+├── workbench/
+│ └── scope.md # Output file containing the generated agent scope
+├── requirements.txt
+└── README.md
+---
 
+## ⚙️ Prerequisites
+
+- Python 3.10+
+- Access to [OpenAI API](https://platform.openai.com/)
+- A running [Supabase](https://supabase.com/) project with:
+  - A table named `site_pages`
+  - Documentation indexed under the `metadata->>source` field
+- Optionally: [Ollama](https://ollama.com/) for local LLMs
+- Basic understanding of LangGraph and Pydantic if extending the agent
+
+---
+
+## 📦 Installation
+
+```bash
+# Clone the repo
+git clone https://github.com/your-username/multi-model-ai-agent.git
+cd multi-model-ai-agent
+
+# Create and activate a virtual environment
+python -m venv .venv
+source .venv/bin/activate  # or .venv\Scripts\activate on Windows
+
+# Install dependencies
+pip install -r requirements.txt
