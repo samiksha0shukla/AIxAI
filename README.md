@@ -43,8 +43,7 @@ It combines **LangGraph**, **Pydantic AI**, **Supabase**, **OpenAI**, and a **re
 ---
 
 ## 📦 Project Structure
-├── crawl4ai+supabase.py       # Script to crawl documentation and upload to Supabase
-
+-'crawl4ai+supabase.py': Script to crawl documentation and upload to Supabase
 ├── pydantic\_ai\_coder.py       # Defines tools and coder logic using Pydantic AI
 ├── pydantic+langgraph.py      # Main agent orchestration using LangGraph
 ├── user\_interface.py          # CLI or UI stream interface to interact with the agent
@@ -93,7 +92,7 @@ pip install -r requirements.txt
 If you haven’t populated Supabase yet:
 
 ```bash
-python crawl4ai+supabase.py
+python knowledgebase.py
 ```
 
 This script crawls Pydantic AI documentation, chunks it, and pushes it into the Supabase `site_pages` table for RAG-based querying.
