@@ -45,7 +45,7 @@ This version also supports local LLMs with Ollama for the main agent and reasoni
 - `pydantic_ai_coder.py`: Defines tools and coder logic using Pydantic AI
 - `multi_agent.py`: Main agent orchestration using LangGraph
 - `site_pages.sql`: Database setup commands
-- `user\_interface.py`: CLI or UI stream interface to interact with the agent
+- `user_interface.py`: CLI or UI stream interface to interact with the agent
 - `workbench/`
    - `scope.md`: Output file containing the generated agent scope
 - `requirements.txt`
