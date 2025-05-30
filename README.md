@@ -1,9 +1,13 @@
 # Agenteer
-# 🧠 Multi-Model AI Agent with Pydantic AI, LangGraph & Supabase
+# 🧠 AI Agent Builder using Pydantic AI, LangGraph & Supabase
 
-This project is a **multi-model AI agent** framework built using the latest in AI orchestration, document retrieval, and modular tooling. The system is designed to interpret user requests and automatically define, plan, and build scoped AI solutions by leveraging structured reasoning, document grounding, and agentic LLM pipelines.
+This project is a Autonomous AI Agent Builder using Pydantic AI framework built using the latest in AI orchestration, document retrieval, and modular tooling. Introducing **LangGraph** for a complete **agentic workflow**. The system is designed as an **AI agent that autonomously builds other AI agents**. The system is designed to interpret user requests and automatically define, plan, and build scoped AI solutions by leveraging structured reasoning, document grounding, and agentic LLM pipelines.
 
-It combines **LangGraph**, **Pydantic AI**, **Supabase**, **OpenAI**, and a **reasoning engine** to provide an extensible framework for building advanced task-specific agents — with human feedback, modular tools, and RAG (Retrieval-Augmented Generation) at its core.
+At its core, Agenteer uses a reasoning LLM (like O3-mini or R1) to interpret user requirements, analyze documentation, and define detailed scope documents. These are then passed on to specialized coding and routing agents that generate high-quality Pydantic AI agents using relevant documentation and structured prompts.
+
+An intelligent documentation crawler, semantic retriever, and multi-agent LLM orchestrator come together to handle the entire lifecycle of AI agent generation — from planning to code delivery.
+
+It combines **LangGraph**, **Pydantic AI**, **Supabase**, **OpenAI**, and a **reasoning engine** to provide an extensible framework for building advanced task-specific agents — with human feedback (human-in-the-loop), modular tools, and RAG (Retrieval-Augmented Generation) at its core.
 
 ---
 
@@ -17,6 +21,8 @@ It combines **LangGraph**, **Pydantic AI**, **Supabase**, **OpenAI**, and a **re
 - ✅ **Supabase Integration**: Dynamically retrieves relevant documentation context from a centralized vector/document database.
 - ✅ **Tool-Enhanced Agent**: Custom tools like `list_documentation_pages()` are defined and registered within the agent.
 - ✅ **Human-in-the-loop Ready**: Scope files and reasoning steps are saved for manual validation or refinement.
+- ✅ **Specialized agents for reasoning, routing, and coding**
+- ✅ **Pydantic AI documentation crawling and chunking**
 
 ---
 
@@ -37,9 +43,9 @@ It combines **LangGraph**, **Pydantic AI**, **Supabase**, **OpenAI**, and a **re
 ---
 
 ## 📦 Project Structure
-├── crawl4ai+supabase.py # Script to crawl documentation and upload to Supabase
+├── knowledgebase.py # Script to crawl documentation and upload to Supabase
 ├── pydantic_ai_coder.py # Defines tools and coder logic using Pydantic AI
-├── pydantic+langgraph.py # Main agent orchestration using LangGraph
+├── multi_agent.py # Main agent orchestration using LangGraph
 ├── user_interface.py # CLI or UI stream interface to interact with the agent
 ├── workbench/
 │ └── scope.md # Output file containing the generated agent scope
