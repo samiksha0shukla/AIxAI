@@ -69,7 +69,7 @@ This version also supports local LLMs with Ollama for the main agent and reasoni
 
 ```bash
 # Clone the repo
-git clone https://github.com/your-username/multi-model-ai-agent.git
+git clone https://github.com/samiksha0shukla/Agenteer.git
 cd samiksha0shukla/Agenteer
 
 # Create and activate a virtual environment
