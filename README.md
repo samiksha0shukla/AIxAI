@@ -72,7 +72,7 @@ It combines **LangGraph**, **Pydantic AI**, **Supabase**, **OpenAI**, and a **re
 ```bash
 # Clone the repo
 git clone https://github.com/your-username/multi-model-ai-agent.git
-cd samiksha0shukla/Agenteert
+cd samiksha0shukla/Agenteer
 
 # Create and activate a virtual environment
 python -m venv .venv
