@@ -82,3 +82,30 @@ source .venv/bin/activate  # or .venv\Scripts\activate on Windows
 
 # Install dependencies
 pip install -r requirements.txt
+````
+
+---
+
+## 🚀 Usage
+
+### 1. 🌐 Load Documentation into Supabase
+
+If you haven’t populated Supabase yet:
+
+```bash
+python crawl4ai+supabase.py
+```
+
+This script crawls Pydantic AI documentation, chunks it, and pushes it into the Supabase `site_pages` table for RAG-based querying.
+
+### 2. 🤖 Run the AI Agent
+
+```bash
+python user_interface.py
+```
+
+This launches the system and prompts you to provide a user goal like:
+
+```
+"Build me an AI agent that verifies inputs using Pydantic and routes API requests."
+```
