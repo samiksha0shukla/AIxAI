@@ -1,5 +1,5 @@
 # Agenteer
-# 🧠 AI Agent Builder using Pydantic AI, LangGraph & Supabase
+# AI Agent Builder using Pydantic AI, LangGraph & Supabase
 
 This project is a Autonomous AI Agent Builder using Pydantic AI framework built using the latest in AI orchestration, document retrieval, and modular tooling. Introducing **LangGraph** for a complete **agentic workflow**. The system is designed as an **AI agent that autonomously builds other AI agents**. The system is designed to interpret user requests and automatically define, plan, and build scoped AI solutions by leveraging structured reasoning, document grounding, and agentic LLM pipelines.
 
