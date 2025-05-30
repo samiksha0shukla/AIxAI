@@ -43,14 +43,17 @@ It combines **LangGraph**, **Pydantic AI**, **Supabase**, **OpenAI**, and a **re
 ---
 
 ## 📦 Project Structure
-├── knowledgebase.py # Script to crawl documentation and upload to Supabase
-├── pydantic_ai_coder.py # Defines tools and coder logic using Pydantic AI
-├── multi_agent.py # Main agent orchestration using LangGraph
-├── user_interface.py # CLI or UI stream interface to interact with the agent
+├── crawl4ai+supabase.py       # Script to crawl documentation and upload to Supabase
+├── pydantic\_ai\_coder.py       # Defines tools and coder logic using Pydantic AI
+├── pydantic+langgraph.py      # Main agent orchestration using LangGraph
+├── user\_interface.py          # CLI or UI stream interface to interact with the agent
 ├── workbench/
-│ └── scope.md # Output file containing the generated agent scope
+│   └── scope.md               # Output file containing the generated agent scope
 ├── requirements.txt
 └── README.md
+
+````
+
 ---
 
 ## ⚙️ Prerequisites
