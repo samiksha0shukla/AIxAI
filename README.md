@@ -98,7 +98,7 @@ This script crawls Pydantic AI documentation, chunks it, and pushes it into the 
 ### 2. 🤖 Run the AI Agent
 
 ```bash
-python user_interface.py
+streamlit run user_interface.py
 ```
 
 This launches the system and prompts you to provide a user goal like:
