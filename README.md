@@ -7,8 +7,6 @@ At its core, Agenteer uses a reasoning LLM (like O3-mini or R1) to interpret use
 
 An intelligent documentation crawler, semantic retriever, and multi-agent LLM orchestrator come together to handle the entire lifecycle of AI agent generation — from planning to code delivery.
 
-It combines **LangGraph**, **Pydantic AI**, **Supabase**, **OpenAI**, and a **reasoning engine** to provide an extensible framework for building advanced task-specific agents — with human feedback (human-in-the-loop), modular tools, and RAG (Retrieval-Augmented Generation) at its core.
-
 This version also supports local LLMs with Ollama for the main agent and reasoning LLM.
 
 ---
