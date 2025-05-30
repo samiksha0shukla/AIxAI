@@ -52,8 +52,6 @@ It combines **LangGraph**, **Pydantic AI**, **Supabase**, **OpenAI**, and a **re
 - `requirements.txt`
 - `README.md`
 
-````
-
 ---
 
 ## ⚙️ Prerequisites
