@@ -40,6 +40,12 @@ This version also supports local LLMs with Ollama for the main agent and reasoni
 
 ---
 
+## Agenteer Agent Architecture
+
+![Screenshot (2178)](https://github.com/user-attachments/assets/7371169c-a60c-405b-9438-9df21961bdc9)
+
+---
+
 ## 📦 Project Structure
 - `knowledgebase.py`: Script to crawl documentation and upload to Supabase
 - `pydantic_ai_coder.py`: Defines tools and coder logic using Pydantic AI
