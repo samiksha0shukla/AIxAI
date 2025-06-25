@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "agenteer": {
+      "command": "C:\\Users\\Dell\\Documents\\Agenteer-V2\\venv\\Scripts\\python.exe",
+      "args": [
+        "C:\\Users\\Dell\\Documents\\Agenteer-V2\\mcp_server.py"
+      ]
+    }
+  }
+}
