@@ -207,18 +207,27 @@ CREATE TABLE site_pages (
 
 ## 📁 Project Structure
 
-### Core Files
+### 🧠 Core Files
+- `mcp_server.py` — MCP server script for AI IDE integration  
+- `graph_service.py` — FastAPI service that handles the agentic workflow  
+- `setup_mcp.py` — MCP setup script  
+- `streamlit_ui.py` — Web interface with streaming support  
+- `requirements.txt` — Project dependencies  
+- `.env.example` — Example environment variables  
 
-| File               | Description                           |
-| ------------------ | ------------------------------------- |
-| `mcp_server.py`    | MCP server script for IDE integration |
-| `graph_service.py` | FastAPI service for agent workflow    |
-| `setup_mcp.py`     | MCP setup utility                     |
-| `streamlit_ui.py`  | Streamlit web interface               |
-| `requirements.txt` | Python dependencies                   |
-| `.env.example`     | Environment variable example          |
+### 🧩 Agenteer Package (`archon/`)
+- `archon_graph.py` — LangGraph workflow definition and agent coordination  
+- `pydantic_ai_coder.py` — Main coding agent with RAG capabilities  
+- `crawl_pydantic_ai_docs.py` — Documentation crawler and processor  
 
-### Agenteer Package
+### 🛠️ Utilities (`utils/`)
+- `utils.py` — Shared utility functions  
+- `site_pages.sql` — Database setup commands  
+- `site_pages_ollama.sql` — Setup commands for embeddings with 768 dimensions (`nomic-embed-text`)  
 
-\| File
+### 🧪 Runtime
+- `workbench/` — Runtime files and logs  
+- `venv/` — Python virtual environment (created during setup)  
 
+### 🤝 Contributing
+Contributions are welcome! Please feel free to submit a Pull Request.
