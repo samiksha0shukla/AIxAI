@@ -1,4 +1,4 @@
-# **Agenteer V3 - AI Agent Generator with MCP Support**
+# **Agenteer V2 - AI Agent Generator with MCP Support**
 
 This is the third iteration of the Agenteer project, building upon V2 by adding MCP server support for seamless integration with AI IDEs like **Windsurf** and **Cursor**. The system starts with a reasoning LLM that analyzes user requirements and documentation to create a detailed scope, which then guides specialized coding and routing agents in generating high-quality **Pydantic AI agents**.
 
@@ -210,7 +210,7 @@ CREATE TABLE site_pages (
 * `mcp_server.py`: MCP server script for AI IDE integration
 * `graph_service.py`: FastAPI service that handles the agentic workflow
 * `setup_mcp.py`: MCP setup script
-* `streamlit_ui.py`: Web interface with streaming support
+* `user_interface.py`: Web interface with streaming support
 * `requirements.txt`: Project dependencies
 * `.env.example`: Example environment variables
 
@@ -220,9 +220,9 @@ CREATE TABLE site_pages (
 
 * `archon/`: Core agent and workflow implementation
 
-  * `archon_graph.py`: LangGraph workflow definition and agent coordination
+  * `multi_agent.py`: LangGraph workflow definition and agent coordination
   * `pydantic_ai_coder.py`: Main coding agent with RAG capabilities
-  * `crawl_pydantic_ai_docs.py`: Documentation crawler and processor
+  * `knowledgebase.py`: Documentation crawler and processor
 
 ---
 
