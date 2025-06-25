@@ -1,4 +1,6 @@
 # 🤖 Agenteer - V1
+![ChatGPT Image Jun 18, 2025, 12_49_41 PM](https://github.com/user-attachments/assets/7fcba906-d33f-4d7e-8f90-30fa4f792693)
+
 # AI Agent Builder using Pydantic AI, LangGraph & Supabase
 
 The system is designed as an **AI agent that autonomously builds other AI agents**. This project is a Autonomous AI Agent Builder using Pydantic AI framework built using the latest in AI orchestration, document retrieval, and modular tooling. Introducing **LangGraph** for a complete **agentic workflow**. The system is designed to interpret user requests and automatically define, plan, and build scoped AI solutions by leveraging structured reasoning, document grounding, and agentic LLM pipelines.
