@@ -1,89 +1,70 @@
-# 🧠 Agenteer V3 – AI Agent Generator with MCP Support
+# **Agenteer V3 - AI Agent Generator with MCP Support**
 
-**Agenteer V3** is the third iteration of the Agenteer project, building upon V2 by adding **MCP server support** for seamless integration with AI IDEs like **Windsurf** and **Cursor**.
+This is the third iteration of the Agenteer project, building upon V2 by adding MCP server support for seamless integration with AI IDEs like **Windsurf** and **Cursor**. The system starts with a reasoning LLM that analyzes user requirements and documentation to create a detailed scope, which then guides specialized coding and routing agents in generating high-quality **Pydantic AI agents**.
 
-At its core, Agenteer begins with a **reasoning LLM** that analyzes user requirements and documentation to create a detailed scope. This scope then guides **specialized coding and routing agents** to generate high-quality **Pydantic AI agents**.
+What makes V3 special is its ability to run as an **MCP server**, allowing AI IDEs to directly leverage Agenteer's agent generation capabilities. When you ask your AI IDE to create a new agent, Agenteer can not only generate the code but the IDE can automatically write it to the appropriate files, manage dependencies, and help you test the agent — creating a powerful synergy between agent generation and development environment.
 
-## 🚀 What’s New in V3?
+The core remains an intelligent documentation crawler and **RAG (Retrieval-Augmented Generation)** system built using **Pydantic AI**, **LangGraph**, and **Supabase**. The system crawls the Pydantic AI documentation, stores content in a vector database, and provides Pydantic AI agent code by retrieving and analyzing relevant documentation chunks.
 
-What makes **V3** special is its ability to run as an **MCP server**, enabling AI IDEs to:
-
-* Directly leverage Agenteer’s agent generation capabilities
-* Automatically write generated code to appropriate files
-* Manage dependencies
-* Assist in agent testing
-
-This creates a powerful synergy between **agent generation** and **development environments**.
+This version supports both local LLMs with **Ollama** and cloud-based LLMs through **OpenAI/OpenRouter**.
 
 ---
 
-## 🔧 Core Architecture
+## **Features**
 
-Agenteer features an intelligent **documentation crawler** and **RAG system (Retrieval-Augmented Generation)** built using:
-
-* **Pydantic AI**
-* **LangGraph**
-* **Supabase**
-
-It crawls the Pydantic AI documentation, stores content in a **vector database**, and provides agent code by retrieving and analyzing relevant documentation chunks.
-
-Supports both:
-
-* **Local LLMs (via Ollama)**
-* **Cloud-based LLMs (via OpenAI or OpenRouter)**
+* MCP server support for AI IDE integration
+* Multi-agent workflow using **LangGraph**
+* Specialized agents for reasoning, routing, and coding
+* Pydantic AI documentation crawling and chunking
+* Vector database storage with **Supabase**
+* Semantic search using **OpenAI embeddings**
+* RAG-based question answering
+* Support for code block preservation
+* Streamlit UI for interactive querying
 
 ---
 
-## ✨ Features
-
-* ✅ **MCP server support** for AI IDE integration
-* 🔁 **Multi-agent workflow** using LangGraph
-* 👩‍💻 **Specialized agents** for reasoning, routing, and coding
-* 📄 **Documentation crawling and chunking**
-* 💾 **Vector database storage** using Supabase
-* 🧠 **Semantic search** with OpenAI embeddings
-* 📚 **RAG-based question answering**
-* 💻 **Code block preservation**
-* 🌐 **Streamlit UI** for interactive querying
-
----
-
-## 🛠 Prerequisites
+## **Prerequisites**
 
 * Python 3.11+
 * Supabase account and database
-* OpenAI/OpenRouter API key or Ollama
-* Streamlit
-* Windsurf, Cursor, or any MCP-compatible IDE (optional)
+* OpenAI/OpenRouter API key or Ollama for local LLMs
+* Streamlit (for web interface)
+* Windsurf, Cursor, or another MCP-compatible AI IDE (optional)
 
 ---
 
-## 📦 Installation
+## **Installation**
 
-### Option 1: Standard Installation (Streamlit UI)
+### **Option 1: Standard Installation (for using the Streamlit UI)**
+
+1. Clone the repository:
 
 ```bash
 git clone https://github.com/coleam00/archon.git
 cd archon/iterations/v3-mcp-support
+```
 
-# Create virtual environment
+2. Install dependencies:
+
+```bash
 python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
-
-# Install dependencies
 pip install -r requirements.txt
 ```
 
-### Option 2: MCP Server Setup (for AI IDE Integration)
+---
+
+### **Option 2: MCP Server Setup (for AI IDE integration)**
+
+1. Clone the repository as above
+2. Run the MCP setup script:
 
 ```bash
-# Clone and set up
-git clone https://github.com/coleam00/archon.git
-cd archon/iterations/v3-mcp-support
 python setup_mcp.py
 ```
 
-To activate virtual environment later:
+3. For running the crawler and graph service later, activate the virtual environment:
 
 ```bash
 source venv/bin/activate  # On Windows: venv\Scripts\activate
@@ -91,64 +72,75 @@ source venv/bin/activate  # On Windows: venv\Scripts\activate
 
 This will:
 
-* Create a virtual environment
-* Install dependencies
-* Generate MCP config file
+* Create a virtual environment if it doesn't exist
+* Install dependencies from `requirements.txt`
+* Generate an MCP configuration file
 
 ---
 
-## ⚙️ AI IDE Configuration
+### **Configure your AI IDE**
 
-### In Windsurf:
+#### **In Windsurf:**
 
-1. Click on the hammer icon above chat
-2. Click "Configure"
-3. Paste MCP config JSON from `setup_mcp.py`
-4. Click "Refresh"
+* Click on the hammer icon above the chat input
+* Click on **"Configure"**
+* Paste the JSON that `setup_mcp.py` gave you as the MCP config
+* Click **"Refresh"** next to **"Configure"**
 
-### In Cursor:
+#### **In Cursor:**
 
-1. Go to Settings > Features > MCP
-2. Click "+ Add New MCP Server"
-3. Set:
+* Go to **Cursor Settings > Features > MCP**
+* Click on **"+ Add New MCP Server"**
+* Name: **Agenteer**
+* Type: **command** (equivalent to stdio)
+* Command: Paste the command that `setup_mcp.py` gave for Cursor
 
-   * Name: `Agenteer`
-   * Type: `command`
-   * Command: Use the command from `setup_mcp.py`
-
-> **Important:** Restart the MCP server after setup is complete.
+> ⚠️ **NOTE:** This MCP server will only be functional once you complete the steps below! Be sure to restart your MCP server after finishing all steps.
 
 ---
 
-## 🌍 Environment Setup
+## **Environment Setup**
 
 1. Rename `.env.example` to `.env`
-2. Edit it with your own configuration:
+2. Edit `.env` with your API keys and preferences:
 
-```env
-BASE_URL=https://api.openai.com/v1
-LLM_API_KEY=your_openai_or_openrouter_api_key
-OPENAI_API_KEY=your_openai_api_key
-SUPABASE_URL=your_supabase_url
-SUPABASE_SERVICE_KEY=your_supabase_service_key
-PRIMARY_MODEL=your_main_coding_llm
-REASONER_MODEL=your_reasoning_llm
-EMBEDDING_MODEL=your_embedding_model
+```
+BASE_URL=https://api.openai.com/v1           # OpenAI
+# OR
+BASE_URL=https://api.openrouter.ai/v1        # OpenRouter
+# OR
+BASE_URL=http://localhost:11434              # Ollama
+
+LLM_API_KEY=your_openai_or_openrouter_api_key  
+OPENAI_API_KEY=your_openai_api_key  
+SUPABASE_URL=your_supabase_url  
+SUPABASE_SERVICE_KEY=your_supabase_service_key  
+PRIMARY_MODEL=your_main_coding_llm  
+REASONER_MODEL=your_reasoning_llm  
+EMBEDDING_MODEL=your_embedding_model  
 ```
 
 ---
 
-## 🧮 Database Setup
+## **Usage**
 
-1. Open Supabase → SQL Editor
-2. Paste and run:
+### **Database Setup**
 
-   * `utils/site_pages.sql` (for 1536D embeddings)
-   * Or `utils/ollama_site_pages.sql` (for 768D embeddings, e.g., `nomic-embed-text`)
+Execute the SQL commands in `utils/site_pages.sql` to:
+
+* Create the necessary tables
+* Enable vector similarity search
+* Set up Row Level Security policies
+
+> In **Supabase**, go to the **"SQL Editor"** tab, paste the SQL into the editor, then click **"Run"**.
+
+> 📝 If using **Ollama** with the `nomic-embed-text` embedding model or another with 768 dimensions, either update `site_pages.sql` to use 768 instead of 1536, or use `utils/ollama_site_pages.sql`.
 
 ---
 
-## 🕸 Crawl Documentation
+### **Crawl Documentation**
+
+To crawl and store documentation in the vector database:
 
 ```bash
 python archon/crawl_pydantic_ai_docs.py
@@ -156,39 +148,45 @@ python archon/crawl_pydantic_ai_docs.py
 
 This will:
 
-* Crawl the docs
-* Split into chunks
-* Generate embeddings
-* Store them in Supabase
+* Fetch URLs from the documentation sitemap
+* Crawl each page and split into chunks
+* Generate embeddings and store in Supabase
 
 ---
 
-## 🤖 Using with AI IDEs (MCP Support)
+### **Using with AI IDEs (MCP Support)**
 
-1. After crawling, start the agent graph service:
+After crawling the documentation, start the graph service:
 
 ```bash
 python graph_service.py
 ```
 
-> Agenteer runs as a **separate API endpoint** to avoid LLM call interference and allow independent updates.
+Agenteer runs as a separate API endpoint for MCP instead of directly in the MCP server. This allows Agenteer to be updated separately without needing to restart the MCP server, and avoids communication protocol conflicts with LLM calls.
 
-2. Restart your MCP server in the IDE
-3. You can now generate agents directly via your IDE
+✅ **Restart the MCP server in your AI IDE**
+✅ You can now ask your AI IDE to create agents with Agenteer
+✅ Be sure to specify when you want to use Agenteer – not necessary but helpful
 
 ---
 
-## 🌐 Using the Streamlit UI
+### **Using the Streamlit UI**
+
+To launch the interactive web interface:
 
 ```bash
 streamlit run streamlit_ui.py
 ```
 
-Visit: [http://localhost:8501](http://localhost:8501)
+The interface will be available at: [http://localhost:8501](http://localhost:8501)
 
 ---
 
-## 🗃 Database Schema
+## **Configuration**
+
+### **Database Schema**
+
+The Supabase database uses the following schema:
 
 ```sql
 CREATE TABLE site_pages (
@@ -199,35 +197,55 @@ CREATE TABLE site_pages (
     summary TEXT,
     content TEXT,
     metadata JSONB,
-    embedding VECTOR(1536) -- or VECTOR(768) for nomic-embed-text
+    embedding VECTOR(1536) -- Adjust dimensions as necessary (i.e. 768 for nomic-embed-text)
 );
 ```
 
 ---
 
-## 📁 Project Structure
+## **Project Structure**
 
-### 🧠 Core Files
-- `mcp_server.py` — MCP server script for AI IDE integration  
-- `graph_service.py` — FastAPI service that handles the agentic workflow  
-- `setup_mcp.py` — MCP setup script  
-- `streamlit_ui.py` — Web interface with streaming support  
-- `requirements.txt` — Project dependencies  
-- `.env.example` — Example environment variables  
+### **Core Files**
 
-### 🧩 Agenteer Package (`archon/`)
-- `archon_graph.py` — LangGraph workflow definition and agent coordination  
-- `pydantic_ai_coder.py` — Main coding agent with RAG capabilities  
-- `crawl_pydantic_ai_docs.py` — Documentation crawler and processor  
+* `mcp_server.py`: MCP server script for AI IDE integration
+* `graph_service.py`: FastAPI service that handles the agentic workflow
+* `setup_mcp.py`: MCP setup script
+* `streamlit_ui.py`: Web interface with streaming support
+* `requirements.txt`: Project dependencies
+* `.env.example`: Example environment variables
 
-### 🛠️ Utilities (`utils/`)
-- `utils.py` — Shared utility functions  
-- `site_pages.sql` — Database setup commands  
-- `site_pages_ollama.sql` — Setup commands for embeddings with 768 dimensions (`nomic-embed-text`)  
+---
 
-### 🧪 Runtime
-- `workbench/` — Runtime files and logs  
-- `venv/` — Python virtual environment (created during setup)  
+### **Agenteer Package**
 
-### 🤝 Contributing
-Contributions are welcome! Please feel free to submit a Pull Request.
+* `archon/`: Core agent and workflow implementation
+
+  * `archon_graph.py`: LangGraph workflow definition and agent coordination
+  * `pydantic_ai_coder.py`: Main coding agent with RAG capabilities
+  * `crawl_pydantic_ai_docs.py`: Documentation crawler and processor
+
+---
+
+### **Utilities**
+
+* `utils/`: Utility functions and database setup
+
+  * `utils.py`: Shared utility functions
+  * `site_pages.sql`: Database setup commands
+  * `site_pages_ollama.sql`: Vector dimensions updated for `nomic-embed-text`
+
+---
+
+### **Runtime**
+
+* `workbench/`: Runtime files and logs
+* `venv/`: Python virtual environment (created by setup)
+
+---
+
+## **Contributing**
+
+Contributions are welcome! Please feel free to submit a **Pull Request**.
+
+---
+
