@@ -34,6 +34,11 @@ This version supports both local LLMs with **Ollama** and cloud-based LLMs throu
 
 ---
 
+## Agenteer Agent Architecture
+![ChatGPT Image Jun 27, 2025, 04_57_36 PM](https://github.com/user-attachments/assets/2dd5c841-6587-4e83-bea5-2269438f377e)
+
+---
+
 ## **Installation**
 
 ### **Option 1: Standard Installation (for using the Streamlit UI)**
