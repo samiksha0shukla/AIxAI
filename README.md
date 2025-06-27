@@ -1,6 +1,6 @@
 # **Agenteer V2 - AI Agent Generator with MCP Support**
 
-This is the second iteration of the Agenteer project, building upon V2 by adding MCP server support for seamless integration with AI IDEs like **Windsurf** and **Cursor**. The system starts with a reasoning LLM that analyzes user requirements and documentation to create a detailed scope, which then guides specialized coding and routing agents in generating high-quality **Pydantic AI agents**.
+This is the second version of the Agenteer project, building upon V2 by adding MCP server support for seamless integration with AI IDEs like **Windsurf** and **Cursor**. The system starts with a reasoning LLM that analyzes user requirements and documentation to create a detailed scope, which then guides specialized coding and routing agents in generating high-quality **Pydantic AI agents**.
 
 What makes V3 special is its ability to run as an **MCP server**, allowing AI IDEs to directly leverage Agenteer's agent generation capabilities. When you ask your AI IDE to create a new agent, Agenteer can not only generate the code but the IDE can automatically write it to the appropriate files, manage dependencies, and help you test the agent — creating a powerful synergy between agent generation and development environment.
 
