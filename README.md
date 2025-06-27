@@ -38,8 +38,6 @@ This version supports both local LLMs with **Ollama** and cloud-based LLMs throu
 
 ![Screenshot (2178)](https://github.com/user-attachments/assets/2867183b-9e92-4197-a4e9-d85c609a4225)
 
-![ChatGPT Image Jun 27, 2025, 04_57_36 PM](https://github.com/user-attachments/assets/2dd5c841-6587-4e83-bea5-2269438f377e)
-
 ---
 
 ## **Installation**
