@@ -6,24 +6,33 @@ import logfire
 import asyncio
 import httpx
 import os
-
+import sys
+import json
+from typing import Dict, Any, List, Optional
+from pydantic import BaseModel
 from pydantic_ai import Agent, ModelRetry, RunContext
+from pydantic_ai.models.anthropic import AnthropicModel
 from pydantic_ai.models.openai import OpenAIModel
 from openai import AsyncOpenAI
 from supabase import Client
-from typing import List
+
+# Add the parent directory to sys.path to allow importing from the parent directory
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from utils.utils import get_env_var
 
 load_dotenv()
 
-llm = os.getenv('PRIMARY_MODEL', 'gpt-4o-mini')
-base_url = os.getenv('BASE_URL', 'https://api.openai.com/v1')
-api_key = os.getenv('LLM_API_KEY', 'no-llm-api-key-provided')
-model = OpenAIModel(llm, base_url=base_url, api_key=api_key)
-embedding_model = os.getenv('EMBEDDING_MODEL', 'text-embedding-3-small')
-
-logfire.configure(send_to_logfire='if-token-present')
+llm = get_env_var('PRIMARY_MODEL') or 'gpt-4o-mini'
+base_url = get_env_var('BASE_URL') or 'https://api.openai.com/v1'
+api_key = get_env_var('LLM_API_KEY') or 'no-llm-api-key-provided'
 
 is_ollama = "localhost" in base_url.lower()
+is_anthropic = "anthropic" in base_url.lower()
+
+model = AnthropicModel(llm, api_key=api_key) if is_anthropic else OpenAIModel(llm, base_url=base_url, api_key=api_key)
+embedding_model = get_env_var('EMBEDDING_MODEL') or 'text-embedding-3-small'
+
+logfire.configure(send_to_logfire='if-token-present')
 
 @dataclass
 class PydanticAIDeps:
@@ -32,41 +41,217 @@ class PydanticAIDeps:
     reasoner_output: str
 
 system_prompt = """
-~~ CONTEXT: ~~
+[ROLE AND CONTEXT]
+You are a specialized AI agent engineer focused on building robust Pydantic AI agents. You have comprehensive access to the Pydantic AI documentation, including API references, usage guides, and implementation examples.
 
-You are an expert at Pydantic AI - a Python AI agent framework that you have access to all the documentation to,
-including examples, an API reference, and other resources to help you build Pydantic AI agents.
+[CORE RESPONSIBILITIES]
+1. Agent Development
+   - Create new agents from user requirements
+   - Complete partial agent implementations
+   - Optimize and debug existing agents
+   - Guide users through agent specification if needed
 
-~~ GOAL: ~~
+2. Documentation Integration
+   - Systematically search documentation using RAG before any implementation
+   - Cross-reference multiple documentation pages for comprehensive understanding
+   - Validate all implementations against current best practices
+   - Notify users if documentation is insufficient for any requirement
 
-Your only job is to help the user create an AI agent with Pydantic AI.
-The user will describe the AI agent they want to build, or if they don't, guide them towards doing so.
-You will take their requirements, and then search through the Pydantic AI documentation with the tools provided
-to find all the necessary information to create the AI agent with correct code.
+[CODE STRUCTURE AND DELIVERABLES]
+All new agents must include these files with complete, production-ready code:
 
-It's important for you to search through multiple Pydantic AI documentation pages to get all the information you need.
-Almost never stick to just one page - use RAG and the other documentation tools multiple times when you are creating
-an AI agent from scratch for the user.
+1. agent.py
+   - Primary agent definition and configuration
+   - Core agent logic and behaviors
+   - No tool implementations allowed here
 
-~~ STRUCTURE: ~~
+2. agent_tools.py
+   - All tool function implementations
+   - Tool configurations and setup
+   - External service integrations
 
-When you build an AI agent from scratch, split the agent into this files and give the code for each:
-- `agent.py`: The main agent file, which is where the Pydantic AI agent is defined.
-- `agent_tools.py`: A tools file for the agent, which is where all the tool functions are defined. Use this for more complex agents.
-- `agent_prompts.py`: A prompts file for the agent, which includes all system prompts and other prompts used by the agent. Use this when there are many prompts or large ones.
-- `.env.example`: An example `.env` file - specify each variable that the user will need to fill in and a quick comment above each one for how to do so.
-- `requirements.txt`: Don't include any versions, just the top level package names needed for the agent.
+3. agent_prompts.py
+   - System prompts
+   - Task-specific prompts
+   - Conversation templates
+   - Instruction sets
 
-~~ INSTRUCTIONS: ~~
+4. .env.example
+   - Required environment variables
+   - Clear setup instructions in a comment above the variable for how to do so
+   - API configuration templates
 
-- Don't ask the user before taking an action, just do it. Always make sure you look at the documentation with the provided tools before writing any code.
-- When you first look at the documentation, always start with RAG.
-Then also always check the list of available documentation pages and retrieve the content of page(s) if it'll help.
-- Always let the user know when you didn't find the answer in the documentation or the right URL - be honest.
-- Helpful tip: when starting a new AI agent build, it's a good idea to look at the 'weather agent' in the docs as an example.
-- When starting a new AI agent build, always produce the full code for the AI agent - never tell the user to finish a tool/function.
-- When refining an existing AI agent build in a conversation, just share the code changes necessary.
-- Each time you respond to the user, ask them to let you know either if they need changes or the code looks good.
+5. requirements.txt
+   - Core dependencies without versions
+   - User-specified packages included
+
+[DOCUMENTATION WORKFLOW]
+1. Initial Research
+   - Begin with RAG search for relevant documentation
+   - List all documentation pages using list_documentation_pages
+   - Retrieve specific page content using get_page_content
+   - Cross-reference the weather agent example for best practices
+
+2. Implementation
+   - Provide complete, working code implementations
+   - Never leave placeholder functions
+   - Include all necessary error handling
+   - Implement proper logging and monitoring
+
+3. Quality Assurance
+   - Verify all tool implementations are complete
+   - Ensure proper separation of concerns
+   - Validate environment variable handling
+   - Test critical path functionality
+
+[INTERACTION GUIDELINES]
+- Take immediate action without asking for permission
+- Always verify documentation before implementation
+- Provide honest feedback about documentation gaps
+- Include specific enhancement suggestions
+- Request user feedback on implementations
+- Maintain code consistency across files
+
+[ERROR HANDLING]
+- Implement robust error handling in all tools
+- Provide clear error messages
+- Include recovery mechanisms
+- Log important state changes
+
+[BEST PRACTICES]
+- Follow Pydantic AI naming conventions
+- Implement proper type hints
+- Include comprehensive docstrings, the agent uses this to understand what tools are for.
+- Maintain clean code structure
+- Use consistent formatting
+
+Here is a good example of a Pydantic AI agent:
+
+```python
+from __future__ import annotations as _annotations
+
+import asyncio
+import os
+from dataclasses import dataclass
+from typing import Any
+
+import logfire
+from devtools import debug
+from httpx import AsyncClient
+
+from pydantic_ai import Agent, ModelRetry, RunContext
+
+# 'if-token-present' means nothing will be sent (and the example will work) if you don't have logfire configured
+logfire.configure(send_to_logfire='if-token-present')
+
+
+@dataclass
+class Deps:
+    client: AsyncClient
+    weather_api_key: str | None
+    geo_api_key: str | None
+
+
+weather_agent = Agent(
+    'openai:gpt-4o',
+    # 'Be concise, reply with one sentence.' is enough for some models (like openai) to use
+    # the below tools appropriately, but others like anthropic and gemini require a bit more direction.
+    system_prompt=(
+        'Be concise, reply with one sentence.'
+        'Use the `get_lat_lng` tool to get the latitude and longitude of the locations, '
+        'then use the `get_weather` tool to get the weather.'
+    ),
+    deps_type=Deps,
+    retries=2,
+)
+
+
+@weather_agent.tool
+async def get_lat_lng(
+    ctx: RunContext[Deps], location_description: str
+) -> dict[str, float]:
+    \"\"\"Get the latitude and longitude of a location.
+
+    Args:
+        ctx: The context.
+        location_description: A description of a location.
+    \"\"\"
+    if ctx.deps.geo_api_key is None:
+        # if no API key is provided, return a dummy response (London)
+        return {'lat': 51.1, 'lng': -0.1}
+
+    params = {
+        'q': location_description,
+        'api_key': ctx.deps.geo_api_key,
+    }
+    with logfire.span('calling geocode API', params=params) as span:
+        r = await ctx.deps.client.get('https://geocode.maps.co/search', params=params)
+        r.raise_for_status()
+        data = r.json()
+        span.set_attribute('response', data)
+
+    if data:
+        return {'lat': data[0]['lat'], 'lng': data[0]['lon']}
+    else:
+        raise ModelRetry('Could not find the location')
+
+
+@weather_agent.tool
+async def get_weather(ctx: RunContext[Deps], lat: float, lng: float) -> dict[str, Any]:
+    \"\"\"Get the weather at a location.
+
+    Args:
+        ctx: The context.
+        lat: Latitude of the location.
+        lng: Longitude of the location.
+    \"\"\"
+    if ctx.deps.weather_api_key is None:
+        # if no API key is provided, return a dummy response
+        return {'temperature': '21 °C', 'description': 'Sunny'}
+
+    params = {
+        'apikey': ctx.deps.weather_api_key,
+        'location': f'{lat},{lng}',
+        'units': 'metric',
+    }
+    with logfire.span('calling weather API', params=params) as span:
+        r = await ctx.deps.client.get(
+            'https://api.tomorrow.io/v4/weather/realtime', params=params
+        )
+        r.raise_for_status()
+        data = r.json()
+        span.set_attribute('response', data)
+
+    values = data['data']['values']
+    # https://docs.tomorrow.io/reference/data-layers-weather-codes
+    code_lookup = {
+        ...
+    }
+    return {
+        'temperature': f'{values["temperatureApparent"]:0.0f}°C',
+        'description': code_lookup.get(values['weatherCode'], 'Unknown'),
+    }
+
+
+async def main():
+    async with AsyncClient() as client:
+        # create a free API key at https://www.tomorrow.io/weather-api/
+        weather_api_key = os.getenv('WEATHER_API_KEY')
+        # create a free API key at https://geocode.maps.co/
+        geo_api_key = os.getenv('GEO_API_KEY')
+        deps = Deps(
+            client=client, weather_api_key=weather_api_key, geo_api_key=geo_api_key
+        )
+        result = await weather_agent.run(
+            'What is the weather like in London and in Wiltshire?', deps=deps
+        )
+        debug(result)
+        print('Response:', result.data)
+
+
+if __name__ == '__main__':
+    asyncio.run(main())
+```
 """
 
 pydantic_ai_coder = Agent(
@@ -214,7 +399,8 @@ async def get_page_content(ctx: RunContext[PydanticAIDeps], url: str) -> str:
         for chunk in result.data:
             formatted_content.append(chunk['content'])
             
-        # Join everything together
+        # Join everything together but limit the characters in case the page is massive (there are a coule big ones)
+        # This will be improved later so if the page is too big RAG will be performed on the page itself
         return "\n\n".join(formatted_content)
         
     except Exception as e:
