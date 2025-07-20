@@ -1,8 +1,8 @@
-# **Agenteer V2 - AI Agent Generator with MCP Support**
+# **AIxAI V2 - AI Agent Generator with MCP Support**
 
-This is the second version of the Agenteer project, building upon V2 by adding MCP server support for seamless integration with AI IDEs like **Windsurf** and **Cursor**. The system starts with a reasoning LLM that analyzes user requirements and documentation to create a detailed scope, which then guides specialized coding and routing agents in generating high-quality **Pydantic AI agents**.
+This is the second version of the AIxAI project, building upon V2 by adding MCP server support for seamless integration with AI IDEs like **Windsurf** and **Cursor**. The system starts with a reasoning LLM that analyzes user requirements and documentation to create a detailed scope, which then guides specialized coding and routing agents in generating high-quality **Pydantic AI agents**.
 
-What makes V3 special is its ability to run as an **MCP server**, allowing AI IDEs to directly leverage Agenteer's agent generation capabilities. When you ask your AI IDE to create a new agent, Agenteer can not only generate the code but the IDE can automatically write it to the appropriate files, manage dependencies, and help you test the agent — creating a powerful synergy between agent generation and development environment.
+What makes V3 special is its ability to run as an **MCP server**, allowing AI IDEs to directly leverage AIxAI's agent generation capabilities. When you ask your AI IDE to create a new agent, AIxAI can not only generate the code but the IDE can automatically write it to the appropriate files, manage dependencies, and help you test the agent — creating a powerful synergy between agent generation and development environment.
 
 The core remains an intelligent documentation crawler and **RAG (Retrieval-Augmented Generation)** system built using **Pydantic AI**, **LangGraph**, and **Supabase**. The system crawls the Pydantic AI documentation, stores content in a vector database, and provides Pydantic AI agent code by retrieving and analyzing relevant documentation chunks.
 
@@ -34,6 +34,12 @@ This version supports both local LLMs with **Ollama** and cloud-based LLMs throu
 
 ---
 
+## AIxAI Agent Architectures
+
+![Screenshot (2178)](https://github.com/user-attachments/assets/2867183b-9e92-4197-a4e9-d85c609a4225)
+
+---
+
 ## **Installation**
 
 ### **Option 1: Standard Installation (for using the Streamlit UI)**
@@ -41,8 +47,8 @@ This version supports both local LLMs with **Ollama** and cloud-based LLMs throu
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/coleam00/archon.git
-cd archon/iterations/v3-mcp-support
+https://github.com/samiksha0shukla/AIxAI.git
+cd archon/versions/v2-mcp_support
 ```
 
 2. Install dependencies:
@@ -91,7 +97,7 @@ This will:
 
 * Go to **Cursor Settings > Features > MCP**
 * Click on **"+ Add New MCP Server"**
-* Name: **Agenteer**
+* Name: **AIxAI**
 * Type: **command** (equivalent to stdio)
 * Command: Paste the command that `setup_mcp.py` gave for Cursor
 
@@ -143,7 +149,7 @@ Execute the SQL commands in `utils/site_pages.sql` to:
 To crawl and store documentation in the vector database:
 
 ```bash
-python archon/crawl_pydantic_ai_docs.py
+python aixai/knowledgebase.py
 ```
 
 This will:
@@ -162,11 +168,11 @@ After crawling the documentation, start the graph service:
 python graph_service.py
 ```
 
-Agenteer runs as a separate API endpoint for MCP instead of directly in the MCP server. This allows Agenteer to be updated separately without needing to restart the MCP server, and avoids communication protocol conflicts with LLM calls.
+AIxAI runs as a separate API endpoint for MCP instead of directly in the MCP server. This allows AIxAI to be updated separately without needing to restart the MCP server, and avoids communication protocol conflicts with LLM calls.
 
 ✅ **Restart the MCP server in your AI IDE**
-✅ You can now ask your AI IDE to create agents with Agenteer
-✅ Be sure to specify when you want to use Agenteer – not necessary but helpful
+✅ You can now ask your AI IDE to create agents with AIxAI
+✅ Be sure to specify when you want to use AIxAI – not necessary but helpful
 
 ---
 
@@ -216,9 +222,9 @@ CREATE TABLE site_pages (
 
 ---
 
-### **Agenteer Package**
+### **AIxAI Package**
 
-* `archon/`: Core agent and workflow implementation
+* `aixai/`: Core agent and workflow implementation
 
   * `multi_agent.py`: LangGraph workflow definition and agent coordination
   * `pydantic_ai_coder.py`: Main coding agent with RAG capabilities
@@ -232,7 +238,6 @@ CREATE TABLE site_pages (
 
   * `utils.py`: Shared utility functions
   * `site_pages.sql`: Database setup commands
-  * `site_pages_ollama.sql`: Vector dimensions updated for `nomic-embed-text`
 
 ---
 
@@ -248,4 +253,5 @@ CREATE TABLE site_pages (
 Contributions are welcome! Please feel free to submit a **Pull Request**.
 
 ---
+
 
