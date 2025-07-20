@@ -47,8 +47,8 @@ This version supports both local LLMs with **Ollama** and cloud-based LLMs throu
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/coleam00/archon.git
-cd archon/iterations/v3-mcp-support
+https://github.com/samiksha0shukla/AIxAI.git
+cd archon/versions/v2-mcp_support
 ```
 
 2. Install dependencies:
@@ -149,7 +149,7 @@ Execute the SQL commands in `utils/site_pages.sql` to:
 To crawl and store documentation in the vector database:
 
 ```bash
-python archon/crawl_pydantic_ai_docs.py
+python archon/knowledgebase.py
 ```
 
 This will:
@@ -224,7 +224,7 @@ CREATE TABLE site_pages (
 
 ### **AIxAI Package**
 
-* `archon/`: Core agent and workflow implementation
+* `aixai/`: Core agent and workflow implementation
 
   * `multi_agent.py`: LangGraph workflow definition and agent coordination
   * `pydantic_ai_coder.py`: Main coding agent with RAG capabilities
