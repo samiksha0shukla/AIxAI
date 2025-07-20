@@ -149,7 +149,7 @@ Execute the SQL commands in `utils/site_pages.sql` to:
 To crawl and store documentation in the vector database:
 
 ```bash
-python archon/knowledgebase.py
+python aixai/knowledgebase.py
 ```
 
 This will:
